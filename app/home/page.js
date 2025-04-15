@@ -1,5 +1,43 @@
 import React from "react";
 import Image from "next/image";
+import Listing from "./listing"; // Adjust the import path as necessary
+
+const ListingList = [
+  {
+    title: "Professional Wedding Ceremony",
+    url: "https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    company: "Trust Weddings",
+    description:
+      "At Trust Weddings, we specialize in creating unforgettable wedding experiences tailored to your unique love story. From intimate gatherings to grand celebrations, our team of experienced professionals is dedicated to bringing your vision to life with precision, creativity, and care. We offer comprehensive planning, stunning décor, premium vendor coordination, and day-of event management—ensuring a seamless and stress-free journey from “Yes” to “I Do.” Let us handle the details so you can focus on making beautiful memories.",
+    category: "Wedding",
+    capacity: 100,
+    price: { min: 5000, max: 10000 },
+    location: "Calgary Northwest, Canada ",
+    staff: { min: 12, max: 20 },
+  },
+  {
+    title: "Birthday Celebration Extravaganza",
+    url: "https://images.pexels.com/photos/17931321/pexels-photo-17931321/free-photo-of-portrait-of-a-quinceanera-posing-at-her-birthday-party.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    company: "Event Guys",
+    description: "Description for listing 2",
+    category: "Birthday",
+    capacity: 50,
+    price: { min: 2000, max: 5000 },
+    location: "Vancouver, Canada",
+    staff: { min: 7, max: 10 },
+  },
+  {
+    title: "Celebration of Life Ceremony",
+    url: "https://images.pexels.com/photos/31568208/pexels-photo-31568208/free-photo-of-young-graduates-celebrating-with-flowers.jpeg?auto=compress&cs=tinysrgb&w=400",
+    company: "Forever Young",
+    description: "Description for listing 3",
+    category: "Ceremony",
+    price: { min: 5000, max: 7000 },
+    capacity: 75,
+    location: "Edmonton, Canada",
+    staff: { min: 10, max: 15 },
+  },
+];
 
 export default function HomePage() {
   return (
@@ -48,11 +86,11 @@ export default function HomePage() {
       </header>
 
       {/* Event Category Navigation */}
-      <nav className="flex justify-center gap-4 py-4 bg-indigo-100">
+      <nav className="flex justify-center gap-4 py-4 bg-green-100">
         {["Wedding", "Birthday", "Ceremony", "Federal"].map((event) => (
           <button
             key={event}
-            className="px-4 py-2 text-indigo-700 hover:text-indigo-900 hover:underline"
+            className="px-4 py-2 text-2xl text-green-800 hover:text-green-950 hover:underline"
           >
             {event}
           </button>
@@ -64,19 +102,23 @@ export default function HomePage() {
         <h2 className="mb-4 text-xl font-semibold text-gray-800">
           Event Listings
         </h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {/* Replace this with dynamic listing cards later */}
-          <div className="p-4 bg-white rounded shadow">
-            <h3 className="text-lg font-bold">Sample Listing 1</h3>
-            <p className="text-sm text-gray-600">
-              Description of the event here...
-            </p>
-          </div>
-          <div className="p-4 bg-white rounded shadow">
-            <h3 className="text-lg font-bold">Sample Listing 2</h3>
-            <p className="text-sm text-gray-600">Details about this venue...</p>
-          </div>
-          {/* Add more listing cards as needed */}
+
+        {/* Add more listing cards as needed */}
+        <div className="grid gap-3 lg:grid-cols-2">
+          {ListingList.map((listing, index) => (
+            <Listing
+              key={index}
+              title={listing.title}
+              url={listing.url}
+              company={listing.company}
+              description={listing.description}
+              category={listing.category}
+              capacity={listing.capacity}
+              price={listing.price}
+              location={listing.location}
+              staff={listing.staff}
+            />
+          ))}
         </div>
       </main>
     </div>
