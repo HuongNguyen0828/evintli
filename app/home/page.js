@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Listing from "./listing"; // Adjust the import path as necessary
+import { FaBirthdayCake } from "react-icons/fa";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 const ListingList = [
   {
@@ -41,7 +43,7 @@ const ListingList = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen min-w-md bg-gray-50">
       {/* Top Navigation Bar */}
       <header className="flex items-center justify-between gap-36 px-20 py-4 bg-white shadow-md">
         {/* Left: Company Name */}
@@ -68,13 +70,7 @@ export default function HomePage() {
           <button className="px-4 py-2 text-white bg-gray-900 rounded-lg hover:bg-indigo-700">
             Add Listing
           </button>
-          <Image
-            src="/assets/chat.png"
-            alt="Profile"
-            height={40}
-            width={40}
-            className="w-10 h-10 rounded-full ml-4"
-          />
+          <IoMdNotificationsOutline className="text-4xl" />
           <Image
             src="/assets/profile.png"
             alt="Profile"
@@ -86,15 +82,18 @@ export default function HomePage() {
       </header>
 
       {/* Event Category Navigation */}
+
       <nav className="flex justify-center gap-4 py-4 bg-green-100">
-        {["Wedding", "Birthday", "Ceremony", "Federal"].map((event) => (
-          <button
-            key={event}
-            className="px-4 py-2 text-2xl text-green-800 hover:text-green-950 hover:underline"
-          >
-            {event}
-          </button>
-        ))}
+        {["Home", "Wedding", "Birthday", "Ceremony", "Federal", "Others"].map(
+          (event) => (
+            <button
+              key={event}
+              className="px-4 py-2 text-2xl text-green-800 hover:text-green-950 hover:underline"
+            >
+              {event}
+            </button>
+          )
+        )}
       </nav>
 
       {/* Main Body - Listings */}
