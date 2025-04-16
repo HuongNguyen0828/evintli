@@ -3,15 +3,20 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import ClipLoader from "react-spinners/ClipLoader";
+
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const res = await fetch("/api/auth/login", {
       method: "POST",
@@ -19,11 +24,15 @@ export default function LoginPage() {
     });
 
     const data = await res.json();
-    if (!res.ok) return setError(data.error || "Something went wrong");
+    if (!res.ok) {
+      setLoading(false);
+      return setError(data.error || "Something went wrong");
+    }
 
     // You can store the token in cookies or localStorage here
     // localStorage.setItem('token', data.token);
     router.push("/home");
+    setLoading(false);
   };
 
   return (
@@ -52,7 +61,7 @@ export default function LoginPage() {
         />
         {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
         <button className="bg-blue-600 text-white py-2 rounded w-full font-semibold">
-          Login
+          {loading && <ClipLoader color="#fff" size={15} />} Login
         </button>
         <p className="text-center text-black text-sm mt-4">
           Don’t have an account?{" "}
